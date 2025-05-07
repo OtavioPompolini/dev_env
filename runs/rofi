@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-sudo apt install rofi
+sudo pacman -S --noconfirm rofi-wayland
 

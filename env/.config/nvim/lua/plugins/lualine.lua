@@ -2,25 +2,6 @@ return {
 	"nvim-lualine/lualine.nvim",
 	event = "VeryLazy",
 	config = function()
-		-- local harpoon = require("harpoon")
-		-- local function harpoon_component()
-		-- 	local total_marks = harpoon:list():length()
-		--
-		-- 	if total_marks == 0 then
-		-- 		return ""
-		-- 	end
-		--
-		-- 	local current_mark = "—"
-		--
-		-- 	local mark_idx = harpoon:list():index()
-		-- 	print("pudim" .. vim.inspect(mark_idx))
-		-- 	if mark_idx ~= nil then
-		-- 		current_mark = tostring(mark_idx)
-		-- 	end
-		--
-		-- 	return string.format("󱡅 %s/%d", current_mark, total_marks)
-		-- end
-
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,

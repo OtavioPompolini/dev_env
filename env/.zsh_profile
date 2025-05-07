@@ -40,7 +40,6 @@ addToPathFront() {
 }
 
 addToPathFront $HOME/.local/.npm-global/bin
-addToPathFront $HOME/.local/odin
 addToPathFront $HOME/.local/apps
 addToPathFront $HOME/.local/scripts
 addToPathFront $HOME/.local/bin
@@ -51,8 +50,6 @@ addToPathFront $HOME/.local/apps/
 # do i need this one?
 addToPathFront $HOME/.local/go/bin
 addToPathFront /usr/local/go/bin
-addToPathFront $HOME/personal/sumneko/bin
-addToPathFront $HOME/.deno/bin
 addToPath $HOME/.cargo/bin
 addToPath $HOME/personal/ghostty/zig-out/bin
 addToPath $HOME/.local/personal
