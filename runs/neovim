@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+sudo pacman -S --noconfirm neovim lua51 luarocks
+
+git clone https://github.com/OtavioPompolini/lazyhttp.git $HOME/workspace/lazyhttp
+
+sudo luarocks install luacheck
