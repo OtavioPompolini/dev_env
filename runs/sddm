@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+sudo pacman -S --noconfirm qt5ct qt6ct qt6-svg qt5-wayland qt6-wayland
+sudo cp -r $DEV_ENV/sddm/theme/anime-sddm /usr/share/sddm/themes/
+sudo sed -i -e 's/Current=.*/Current=anime-sddm/' /usr/lib/sddm/sddm.conf.d/default.conf
+
+

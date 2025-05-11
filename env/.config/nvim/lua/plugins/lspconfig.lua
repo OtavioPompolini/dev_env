@@ -43,7 +43,7 @@ return {
 				map("<leader>ca", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
 				map("<leader>gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 				map("<leader>gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-				map("<leader>gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+				map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 				map("<leader>gs", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
 				map("<leader>gw", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Open Workspace Symbols")
 			end,
