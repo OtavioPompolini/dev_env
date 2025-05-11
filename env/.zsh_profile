@@ -1,5 +1,6 @@
 export XDG_CONFIG_HOME=$HOME/.config
 VIM="nvim"
+EDITOR="nvim"
 
 PERSONAL=$XDG_CONFIG_HOME/personal
 DEV_ENV=$HOME/workspace/dev
@@ -8,7 +9,12 @@ for i in `find -L $PERSONAL`; do
 done
 
 ## All that sweet sweet fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
 
 export GOPATH=$HOME/.local/go
 export GIT_EDITOR=$VIM
@@ -51,18 +57,8 @@ addToPathFront $HOME/.local/apps/
 addToPathFront $HOME/.local/go/bin
 addToPathFront /usr/local/go/bin
 addToPath $HOME/.cargo/bin
-addToPath $HOME/personal/ghostty/zig-out/bin
 addToPath $HOME/.local/personal
 addToPath $HOME/.sst/bin
-addToPathFront $HOME/.local/zig true # some how zig-0.13 just keeps getting added and i CANNOT find it anywhere
-
-# thanks gt
-alias gt='NODE_OPTIONS="--no-deprecation" gt'
-
-source ~/.config/envman/PATH.env
-source ~/.config/envman/load.sh
-
-
 
 #Aliases
 alias vim=nvim
