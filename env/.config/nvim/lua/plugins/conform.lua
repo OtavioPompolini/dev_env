@@ -14,7 +14,7 @@ return {
 			typescript = { { "prettierd", "prettier" } },
 			typescriptreact = { { "prettierd", "prettier" } },
 			lua = { "stylua" },
-			sql = { "sql-formatter" },
+			sql = { "sql_formatter" },
 		},
 	},
 }
