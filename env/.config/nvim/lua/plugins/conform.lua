@@ -15,6 +15,7 @@ return {
 			typescriptreact = { { "prettierd", "prettier" } },
 			lua = { "stylua" },
 			sql = { "sql_formatter" },
+			go = { "goimports-reviser" },
 		},
 	},
 }
