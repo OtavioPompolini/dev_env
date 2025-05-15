@@ -1,6 +1,6 @@
 xkb_symbols "basic" {
-    include "latin"
 
+    include "us(basic)"
     name[Group1]= "English (otavio)";
 
     key <CAPS> {[ Escape ]};
