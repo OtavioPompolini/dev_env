@@ -3,3 +3,4 @@
 sudo pacman -S --noconfirm --needed go fzf pavucontrol rofi-wayland
 sudo pacman -S --noconfirm ttf-font-awesome ttf-jetbrains-mono-nerd ttf-nerd-fonts-symbols
 sudo pacman -S --noconfirm grim slurp wl-clipboard
+sudo pacman -S --noconfirm clang gopls cmake jdtls
