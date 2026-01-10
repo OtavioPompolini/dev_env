@@ -64,3 +64,24 @@ vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
+
+
+-- Enable autoread option
+vim.o.autoread = true
+
+-- Create an autocommand group for auto-reloading
+vim.api.nvim_create_augroup("AutoReload", { clear = true })
+
+-- Trigger checktime on relevant events to reload the buffer if the file has changed externally
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+  group = "AutoReload",
+  command = "if mode() != 'c' | checktime | endif",
+  pattern = { "*" }, -- Apply to all files
+})
+
+-- Optional: Add a notification after a file change is detected and reloaded
+vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
+  group = "AutoReload",
+  command = "echohl WarningMsg | echo 'File changed on disk. Buffer reloaded.' | echohl None",
+  pattern = { "*" },
+})

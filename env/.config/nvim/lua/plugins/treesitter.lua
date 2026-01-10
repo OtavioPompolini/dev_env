@@ -18,12 +18,13 @@ return {
       "python",
     })
 
-    -- Enable native Neovim treesitter highlighting
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "lua", "vim", "vimdoc", "query", "javascript", "typescript", "python" },
-      callback = function()
-        vim.treesitter.start()
-      end,
-    })
+    -- -- Enable native Neovim treesitter highlighting
+    -- vim.api.nvim_create_autocmd("FileType", {
+    --   pattern = { "lua", "vim", "vimdoc", "query", "javascript", "typescript", "python" },
+    --   callback = function()
+    --     vim.treesitter.start()
+    --   end,
+    -- })
   end,
 }
+
