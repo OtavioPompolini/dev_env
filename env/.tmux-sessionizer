@@ -10,7 +10,9 @@ if [[ "$(pwd)" == $HOME/personal ]]; then
     clear
     return
 fi
-tmux new-window -dn scratch
+tmux new-window -dn git
+tmux new-window -dn run
+tmux new-window -dn claudinho "claude"
 vim .
 clear
 
