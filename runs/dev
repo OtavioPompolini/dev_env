@@ -6,3 +6,5 @@ sudo pacman -S --noconfirm grim slurp wl-clipboard
 sudo pacman -S --noconfirm clang gopls cmake jdtls
 sudo pacman -S --noconfirm ghostty
 sudo pacman -S --noconfirm hypridle hyprlock
+
+GOBIN="$HOME/.local/bin" go install github.com/bjarneo/cliamp@latest
