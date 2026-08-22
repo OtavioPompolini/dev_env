@@ -6,13 +6,13 @@ source_vol=$(pactl get-source-volume @DEFAULT_SOURCE@ | grep -oP '\d+(?=%)' | he
 source_mute=$(pactl get-source-mute @DEFAULT_SOURCE@ | awk '{print $2}')
 
 if [[ "$sink_mute" == "yes" ]]; then
-    speaker="muda"
+    speaker="muted"
 else
     speaker="${sink_vol}%"
 fi
 
 if [[ "$source_mute" == "yes" ]]; then
-    mic="muda"
+    mic="muted"
 else
     mic="${source_vol}%"
 fi

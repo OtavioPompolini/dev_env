@@ -80,7 +80,7 @@
         "exec": "$HOME/.local/bin/waybar-audio.sh",
         "interval": 2,
         "tooltip": true,
-        "tooltip-format": "Clique: abrir mixer\nClique direito: silenciar microfone\nClique meio: silenciar saída",
+        "tooltip-format": "Audio module: speaker volume ｜ mic volume\nLeft click: open mixer\nRight click: mute mic\nMiddle click: mute speaker",
         "on-click": "pavucontrol",
         "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
         "on-click-middle": "pactl set-sink-mute @DEFAULT_SINK@ toggle"

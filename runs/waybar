@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-sudo pacman -S --noconfirm waybar pacman-contrib
+sudo pacman -S --noconfirm waybar pacman-contrib yad
 yay -S --noconfirm wlogout
