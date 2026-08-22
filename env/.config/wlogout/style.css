@@ -1,0 +1,76 @@
+/* wlogout — Tokyo Night
+   Coloque em ~/.config/wlogout/style.css
+   Ícones PNG (kanji) em ~/.config/wlogout/icons/ */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans CJK JP", sans-serif;
+    font-weight: 700;
+    transition: 100ms;
+    text-shadow: none;
+}
+
+window {
+    background-color: rgba(22, 22, 30, 0.75);
+}
+
+button {
+    color: #c0caf5;
+    background-color: #1a1b26;
+    border: 3px solid #2a2e42;
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    background-position: center 30%;
+    background-size: 55%;
+    margin: 20px 195px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    padding-top: 70px;
+    box-shadow: none;
+    text-shadow: none;
+    min-width: 220px;
+    min-height: 220px;
+}
+
+button:focus,
+button:active,
+button:hover {
+    outline-style: none;
+}
+
+#lock {
+    background-image: image(url("icons/lock.png"));
+    color: #7aa2f7;
+    border-color: #7aa2f7;
+}
+#logout {
+    background-image: image(url("icons/logout.png"));
+    color: #bb9af7;
+    border-color: #bb9af7;
+}
+#suspend {
+    background-image: image(url("icons/suspend.png"));
+    color: #7dcfff;
+    border-color: #7dcfff;
+}
+#hibernate {
+    background-image: image(url("icons/hibernate.png"));
+    color: #9ece6a;
+    border-color: #9ece6a;
+}
+#reboot {
+    background-image: image(url("icons/reboot.png"));
+    color: #e0af68;
+    border-color: #e0af68;
+}
+#shutdown {
+    background-image: image(url("icons/shutdown.png"));
+    color: #f7768e;
+    border-color: #f7768e;
+}
+
+#lock:hover      { background-color: #24283b; box-shadow: 0 0 0 2px #7aa2f7 inset; }
+#logout:hover    { background-color: #24283b; box-shadow: 0 0 0 2px #bb9af7 inset; }
+#suspend:hover   { background-color: #24283b; box-shadow: 0 0 0 2px #7dcfff inset; }
+#hibernate:hover { background-color: #24283b; box-shadow: 0 0 0 2px #9ece6a inset; }
+#reboot:hover    { background-color: #24283b; box-shadow: 0 0 0 2px #e0af68 inset; }
+#shutdown:hover  { background-color: #24283b; box-shadow: 0 0 0 2px #f7768e inset; }

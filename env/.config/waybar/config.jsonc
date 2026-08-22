@@ -1,28 +1,21 @@
-// -*- mode: jsonc -*-
+// Tokyo Night Waybar config
+// Coloque em ~/.config/waybar/config.jsonc
 {
-    "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "reload_style_on_change": true,
-    "height": 44, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    "spacing": 5, // Gaps between modules (4px)
-    // Choose the order of the modules
-    "margin-bottom": -12,
-    "modules-left": [
-        "hyprland/workspaces"
-    ],
-    "modules-center": [
-        "hyprland/window"
-    ],
-    "modules-right": [
-        "pulseaudio",
-        "network",
-        "battery",
-        "clock",
-        "custom/power"
-    ],
+    "layer": "top",
+    "position": "top",
+    "height": 48,
+    "margin-top": 8,
+    "margin-left": 10,
+    "margin-right": 10,
+    "spacing": 4,
+
+    "modules-left": ["hyprland/workspaces", "hyprland/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["custom/updates", "pulseaudio", "pulseaudio#source", "temperature", "disk", "cpu", "memory", "tray", "custom/power"],
+
     "hyprland/workspaces": {
-    	"format": "{icon}",
+        "format": "{icon}",
+        "on-click": "activate",
         "format-icons": {
             "1": "一",
             "2": "二",
@@ -36,66 +29,83 @@
             "10": "十"
         },
         "persistent-workspaces": {
-            "*": 4
+            "*": 5
         }
     },
+
+    "hyprland/window": {
+        "format": "{title}",
+        "max-length": 40,
+        "separate-outputs": true
+    },
+
     "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format": "時 {:%H:%M}",
+        "format-alt": "日   {:%A, %d %B %Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
-    "battery": {
-        "states": {
-            // "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+
+    "temperature": {
+        "thermal-zone": 0,
+        "format": "熱 {temperatureC}°C",
+        "critical-threshold": 80,
+        "format-critical": "熱 {temperatureC}°C"
     },
+
+    "disk": {
+        "format": "盤 {percentage_used}%",
+        "path": "/",
+        "interval": 30
+    },
+
+    "cpu": {
+        "format": "脳 {usage}%",
+        "tooltip": true,
+        "interval": 5
+    },
+
+    "memory": {
+        "format": "憶 {percentage}%",
+        "interval": 5
+    },
+
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "",
-        "format-ethernet": "",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "󰲜",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-wifi": "󰖩 {signalStrength}%",
+        "format-ethernet": "󰈀 {ipaddr}",
+        "format-disconnected": "󰖪 desconectado",
+        "tooltip-format": "{essid} ({signalStrength}%)"
     },
+
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{icon} {format_source}",
-        "format-bluetooth": "{icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "",
-        "format-source-muted": "",
+        "format": "{icon} {volume}%",
+        "format-muted": " mudo",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
+            "default": ["󰕿", "󰖀", "󰕾"]
         },
         "on-click": "pavucontrol"
     },
+
+    "pulseaudio#source": {
+        "format": "音 {volume}%",
+        "format-muted": "音 mudo",
+        "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+    },
+
+    "custom/updates": {
+        "format": "更 {}",
+        "exec": "checkupdates 2>/dev/null | wc -l",
+        "interval": 3600,
+        "on-click": "ghostty -e sh -c 'sudo pacman -Syu; read'"
+    },
+
     "custom/power": {
-        "format" : "⏻",
-        "tooltip": false,
-        "menu": "on-click",
-        "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-        "menu-actions": {
-            "shutdown": "shutdown",
-            "reboot": "reboot",
-            "suspend": "systemctl suspend",
-            "hibernate": "systemctl hibernate"
-        }
+        "format": "⏻",
+        "on-click": "wlogout",
+        "tooltip": false
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
     }
 }
