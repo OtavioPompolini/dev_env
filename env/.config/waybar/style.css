@@ -32,11 +32,10 @@ window#waybar {
 #cpu,
 #memory,
 #network,
-#pulseaudio,
-#pulseaudio#source,
 #temperature,
 #disk,
 #custom-updates,
+#custom-audio,
 #custom-power,
 #tray {
     background-color: @bg-alt;
@@ -104,11 +103,10 @@ window#waybar {
 #cpu         { color: @green; }
 #memory      { color: @yellow; }
 #network     { color: @cyan; }
-#pulseaudio  { color: @orange; }
 #temperature { color: @orange; }
 #disk        { color: @cyan; }
-#pulseaudio#source { color: @magenta; }
 #custom-updates { color: @yellow; }
+#custom-audio { color: @orange; }
 
 #custom-power {
     color: @red;

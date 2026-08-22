@@ -11,7 +11,7 @@
 
     "modules-left": ["hyprland/workspaces", "hyprland/window"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/updates", "pulseaudio", "pulseaudio#source", "temperature", "disk", "cpu", "memory", "tray", "custom/power"],
+    "modules-right": ["custom/updates", "custom/audio", "temperature", "disk", "cpu", "memory", "tray", "custom/power"],
 
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -76,19 +76,14 @@
         "tooltip-format": "{essid} ({signalStrength}%)"
     },
 
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": " mudo",
-        "format-icons": {
-            "default": ["󰕿", "󰖀", "󰕾"]
-        },
-        "on-click": "pavucontrol"
-    },
-
-    "pulseaudio#source": {
-        "format": "音 {volume}%",
-        "format-muted": "音 mudo",
-        "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+    "custom/audio": {
+        "exec": "$HOME/.local/bin/waybar-audio.sh",
+        "interval": 2,
+        "tooltip": true,
+        "tooltip-format": "Clique: abrir mixer\nClique direito: silenciar microfone\nClique meio: silenciar saída",
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+        "on-click-middle": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
     },
 
     "custom/updates": {
