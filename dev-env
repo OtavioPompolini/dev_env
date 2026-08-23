@@ -33,15 +33,20 @@ update_files() {
         configs=`find . -mindepth 1 -maxdepth 1 -type d`
         for c in $configs; do
             directory=${2%/}/${c#./}
-            log "    removing: rm -rf $directory"
 
-            if [[ $dry_run == "0" ]]; then
-                rm -rf $directory
-            fi
+            files=`find $c -type f`
+            for f in $files; do
+                target="${2%/}/${f#./}"
+                log "    removing: rm -f $target"
+                if [[ $dry_run == "0" ]]; then
+                    rm -f $target
+                fi
+            done
 
-            log "    copying env: cp $c $2"
+            log "    copying env: cp -r $c $2 (merge, keeps files not in repo)"
             if [[ $dry_run == "0" ]]; then
-                cp -r ./$c $2
+                mkdir -p $directory
+                cp -r ./$c/. $directory
             fi
         done
 
