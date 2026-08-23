@@ -77,7 +77,7 @@
     },
 
     "custom/audio": {
-        "exec": "$HOME/.local/bin/waybar-audio.sh",
+        "exec": "$HOME/.local/scripts/waybar-audio.sh",
         "interval": 2,
         "tooltip": true,
         "tooltip-format": "Audio module: speaker volume ｜ mic volume\nLeft click: open mixer\nRight click: mute mic\nMiddle click: mute speaker",

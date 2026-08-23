@@ -21,6 +21,18 @@ antiga do repo).
 - `dev-env` → script que faz o rsync/copy real (remove diretório destino e
   copia de novo, então é destrutivo pra qualquer coisa não versionada lá)
 
+## NUNCA criar `env/.local/bin`
+
+Todo script pessoal (helper, wrapper, `exec-once` do hyprland, etc) vai em
+`env/.local/scripts/`, nunca em `env/.local/bin/`.
+
+Motivo: `~/.local/bin` é onde ficam binários instalados fora do repo (rtk,
+cliamp, symlink do claude, etc — não versionados aqui). `dev-env` faz
+`rm -rf` no diretório destino inteiro antes de copiar; se o repo criar
+`env/.local/bin`, o `dev-env` apaga `~/.local/bin` real e destrói esses
+binários. Já aconteceu uma vez. `~/.local/scripts` é dedicado só pra
+scripts do repo, então é seguro de sobrescrever inteiro.
+
 ## Uso
 
 ```bash
