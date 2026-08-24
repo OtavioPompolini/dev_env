@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+# Detects NVIDIA GPU generation from cached sysfs PCI IDs directly (no
+# distro-specific helper dependency, so this works on any Arch install).
+#
+# GSP firmware (used by the open kernel modules) arrived with Turing, whose
+# device IDs start at 0x1e00. Maxwell/Pascal/Volta (0x1340-0x1dff) predate it
+# and need the legacy 580xx driver. Anything older isn't supported here.
+nvidia_gen="none"
+shopt -s nullglob
+for device in /sys/bus/pci/devices/*; do
+    [[ $(< "$device/vendor") == "0x10de" ]] || continue
+    [[ $(< "$device/class") == 0x03* ]] || continue
+
+    device_id=$(< "$device/device")
+    if (( device_id >= 0x1e00 )); then
+        nvidia_gen="gsp"
+    elif (( device_id >= 0x1340 )); then
+        nvidia_gen="legacy"
+    fi
+    break
+done
+
+if [[ $nvidia_gen == "none" ]]; then
+    echo "no nvidia gpu detected, skipping"
+    exit 0
+fi
+
+KERNEL_PACKAGE=$(pacman -Qqs '^linux(-zen|-lts|-hardened)?$' | head -1 || true)
+[[ -n $KERNEL_PACKAGE ]] && sudo pacman -S --noconfirm --needed "$KERNEL_PACKAGE-headers"
+
+if [[ $nvidia_gen == "gsp" ]]; then
+    PACKAGES=(nvidia-open-dkms nvidia-utils lib32-nvidia-utils libva-nvidia-driver)
+else
+    PACKAGES=(nvidia-580xx-dkms nvidia-580xx-utils lib32-nvidia-580xx-utils)
+fi
+
+sudo pacman -S --noconfirm --needed "${PACKAGES[@]}"
+
+# Early KMS, so the nvidia modules load before the display server starts.
+sudo mkdir -p /etc/modprobe.d
+echo "options nvidia_drm modeset=1" | sudo tee /etc/modprobe.d/nvidia.conf > /dev/null
+
+sudo mkdir -p /etc/mkinitcpio.conf.d
+echo "MODULES+=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)" | sudo tee /etc/mkinitcpio.conf.d/nvidia.conf > /dev/null
+
+sudo mkinitcpio -P
+
+# Some Hyprland distros set per-session NVIDIA env vars (NVD_BACKEND,
+# __GLX_VENDOR_LIBRARY_NAME, LIBVA_DRIVER_NAME) automatically once these
+# drivers are installed. If yours doesn't, set them yourself in
+# hyprland.conf's env block -- see env/.config/hypr/hyprland.conf.

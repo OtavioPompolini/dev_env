@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# The desktop shell (bar, launcher, idle/lock, panels) is a single
+# long-running Quickshell instance -- see env/.config/quickshell/shell.json
+# (deployed to ~/.config/omarchy -- see dev-env's update_files remap).
+# Ships from a custom pacman repo (see /etc/pacman.conf), not core/extra.
+# Falls back to AUR if that repo isn't configured:
+# yay -S --noconfirm quickshell-git
+sudo pacman -S --noconfirm --needed quickshell-git

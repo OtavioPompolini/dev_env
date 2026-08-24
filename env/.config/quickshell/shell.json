@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "idle": {
+    "screensaver": 1800,
+    "lock": 1800
+  },
+  "bar": {
+    "position": "top",
+    "transparent": true
+  },
+  "plugins": []
+}
