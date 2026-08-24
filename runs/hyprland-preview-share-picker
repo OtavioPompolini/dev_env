@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Ships from a custom pacman repo (see /etc/pacman.conf), not core/extra.
+# Falls back to AUR if that repo isn't configured:
+# yay -S --noconfirm hyprland-preview-share-picker
+sudo pacman -S --noconfirm --needed hyprland-preview-share-picker

@@ -60,6 +60,19 @@ copy() {
     fi
 }
 
+# Like copy, but only seeds $2 the first time -- skips if it already exists,
+# so local edits to it survive future dev-env runs.
+copy_if_missing() {
+    if [[ -e $2 ]]; then
+        log "skipping (already exists): $2"
+        return
+    fi
+    log "copying: $1 to $2"
+    if [[ $dry_run == "0" ]]; then
+        cp $1 $2
+    fi
+}
+
 update_files $DEV_ENV/env/.config $XDG_CONFIG_HOME
 update_files $DEV_ENV/env/.local $HOME/.local
 
@@ -68,5 +81,12 @@ copy $DEV_ENV/env/.zsh_profile $HOME/.zsh_profile
 copy $DEV_ENV/env/.zshrc $HOME/.zshrc
 copy $DEV_ENV/env/.tmux-sessionizer $HOME/.tmux-sessionizer
 copy $DEV_ENV/dev-env $HOME/.local/scripts/dev-env
+
+# Single-file copies only (never update_files/rm -rf) -- ~/.claude holds
+# live session state, other memory, and files not tracked here. Seeded once
+# and left alone after, so edits made directly in ~/.claude aren't clobbered
+# on every run.
+copy_if_missing $DEV_ENV/env/.claude/CLAUDE.md $HOME/.claude/CLAUDE.md
+copy_if_missing $DEV_ENV/env/.claude/dev-env.md $HOME/.claude/dev-env.md
 
 hyprctl reload

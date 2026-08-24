@@ -33,6 +33,24 @@ cliamp, symlink do claude, etc — não versionados aqui). `dev-env` faz
 binários. Já aconteceu uma vez. `~/.local/scripts` é dedicado só pra
 scripts do repo, então é seguro de sobrescrever inteiro.
 
+## Privilégio (sudo vs pkexec)
+
+Comando privilegiado rodado por um agente (sem terminal interativo pra
+digitar senha do sudo) deve usar `pkexec` em vez de `sudo`. `pkexec` abre um
+prompt gráfico via polkit, então funciona mesmo sem TTY.
+
+Isso só funciona com um agente polkit gráfico rodando — `runs/hyprpolkitagent`
+instala `hyprpolkitagent` e `hyprland.conf` já tem `exec-once = hyprpolkitagent`.
+Sem isso, `pkexec` falha (nenhum agente registrado).
+
+Em terminal interativo normal, continua sendo `sudo`.
+
+Essa regra também vive em `env/.claude/dev-env.md`, incluído por
+`env/.claude/CLAUDE.md` (`@dev-env.md`) — copiado pra `~/.claude/` pelo
+`dev-env` (`copy`, nunca `update_files`/`rm -rf`, já que `~/.claude` guarda
+sessões e outras coisas não versionadas aqui) pra valer em toda sessão do
+Claude Code, não só dentro deste repo.
+
 ## Uso
 
 ```bash
